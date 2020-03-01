@@ -31,15 +31,17 @@ import util
 import resolver
 from provider import ResolveException
 from provider import ContentProvider
+import YDStreamExtractor
 
 
 class TitulkometContentProvider(ContentProvider):
     def __init__(self, username=None, password=None, filter=None,
-                 tmp_dir='/tmp'):
+                 tmp_dir='/tmp', quality=3):
         ContentProvider.__init__(self, 'titulkomet.cz',
                                  'http://www.titulkomet.cz',
                                  username, password, filter, tmp_dir)
         opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookielib.LWPCookieJar()))
+        self.quality = int(quality)
         urllib2.install_opener(opener)
 
     def capabilities(self):
@@ -153,8 +155,8 @@ class TitulkometContentProvider(ContentProvider):
         print 'data end ----'
 
         urls = re.findall('file:[ ]+\"(?P<url>[^\"].+?)\"', data, re.IGNORECASE | re.DOTALL | re.MULTILINE)
-        video_url = resolver.findstreams([re.sub('http[s]?://youtu.be/', 'https://www.youtube.com/watch?v=', urls[0])])
-        print video_url
+        vid = YDStreamExtractor.getVideoInfo(urls[0], quality=self.quality) #quality is 0=SD, 1=720p, 2=1080p, 3=Highest Available
+        video_url = [vid.streams()[0]]
         subs = urls[1]
 
         if video_url and subs:
@@ -171,11 +173,11 @@ class TitulkometContentProvider(ContentProvider):
                item['title'] = i['title']
            except KeyError:
                pass
-           item['url'] = i['url']
-           item['quality'] = i['quality']
-           item['surl'] = i['surl']
+           item['url'] = i['xbmc_url']
+           item['quality'] = i['ytdl_format']['height']
+           item['surl'] = i['ytdl_format']['webpage_url']
            item['subs'] = i['subs']
-           item['headers'] = i['headers']
+           item['headers'] = {}
            try:
                item['fmt'] = i['fmt']
            except KeyError:
