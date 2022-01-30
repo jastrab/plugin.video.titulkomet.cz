@@ -1,9 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<addon id="plugin.video.titulkomet.cz" name="titulkomet.cz" provider-name="BrozikCZ" version="0.0.4">
+<addon id="plugin.video.titulkomet.cz" name="titulkomet.cz" provider-name="BrozikCZ / Jastrab" version="0.0.2">
   <requires>
-    <import addon="xbmc.python" version="2.1.0" />
-    <import addon="script.module.stream.resolver" version="1.6.55" />
-    <import addon="script.module.youtube.dl" version="19.912.0"/>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.stream.resolver" version="1.7.3" />
+    <import addon="script.module.youtube.dl" version="21.417.16"/> 
+    <!-- <import addon="xbmc.python" version="2.1.0" />
+    <import addon="script.module.stream.resolver" version="1.6.55" /> -->
   </requires>
   <extension library="default.py" point="xbmc.python.pluginsource" provides="video">
     <provides>video</provides>
@@ -16,5 +18,8 @@
     <description lang="cs">Videa s českými titulky. Vtipná, šokující, virální, smutná, pěkná prostě všelijaká, ale jedno mají společné - budete jim rozumět.</description>
     <description lang="sk">Videá s českými titulkami. Vtipné, šokujúce, virálne, smutné, pekné, jednoducho všelijaké, ale jedno majú spoločné - budete im rozumieť.</description>
     <platform>all</platform>
+    <assets>
+      <icon>icon.png</icon> 
+    </assets>
   </extension>
 </addon>
