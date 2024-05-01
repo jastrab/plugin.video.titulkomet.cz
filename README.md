@@ -1,5 +1,4 @@
 Kodi plugin pre prehrávanie videí z titulkomet.cz
-- videá pochádzajú z youtube
 
 ![Snímka obrazovky_2024-04-30_17-28-21](https://github.com/jastrab/plugin.video.titulkomet.cz/assets/6190406/010a6bc2-113d-4ada-8310-3905f6df73fd)
 
@@ -19,3 +18,19 @@ Info videa:
 
 ![Snímka obrazovky_2024-04-30_17-26-46](https://github.com/jastrab/plugin.video.titulkomet.cz/assets/6190406/545b227e-0d4f-486b-886d-0ff74d05b552)
 
+Changelog:
+
+0.1.0: - 30.04.2024
+- fix pre novšiu verziu kodi (jastrab)
+- fix url videa (jastrab)
+- fix url tituliek (jastrab)
+- add readme
+
+0.0.2:
+- fix prehravania videí (jastrab)
+- pridaná možnosť prehratia cez originál youtube plugin  (jastrab)
+- fix na Kodi 19.3 Matrix (jastrab)
+- migracia settings pre Kodi 19 (jastrab)
+
+0.0.1:
+Initial version
