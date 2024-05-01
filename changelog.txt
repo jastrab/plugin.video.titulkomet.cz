@@ -1,7 +1,14 @@
+[B]0.1.0:[/B] - 30.04.2024
+- fix pre novšiu verziu kodi (jastrab)
+- fix url videa (jastrab)
+- fix url tituliek (jastrab)
+- add readme
+
 [B]0.0.2:[/B]
 - fix prehravania videí (jastrab)
 - pridaná možnosť prehratia cez originál youtube plugin  (jastrab)
 - fix na Kodi 19.3 Matrix (jastrab)
 - migracia settings pre Kodi 19 (jastrab)
+
 [B]0.0.1:[/B]
 Initial version

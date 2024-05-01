@@ -23,17 +23,6 @@
 
 import re
 import urllib
-# import urllib2
-# import cookielib
-
-# try:
-#     from urllib2 import Request, urlopen, HTTPError
-#     import cookielib
-# except:
-# from urllib.request import Request, urlopen
-# from urllib.error import HTTPError
-# import http.cookiejar as cookielib
-
 
 #Python 2
 try: 
@@ -175,27 +164,31 @@ class TitulkometContentProvider(ContentProvider):
         self.info('== resolve titulkomet ===>' + url)
         original_yt = False
 
-        
-
-
-        data = util.substr(util.request(url), 'jQuery( document ).ready(function()', '</script>')
-
-        urls = re.findall('file:[ ]+\"(?P<url>[^\"].+?)\"', data, re.IGNORECASE | re.DOTALL | re.MULTILINE)
-        self.info(urls)
-        if original_yt:
-            url2 = urls[0]
-            # e = 'watch?v='
-            e = 'youtu.be/'
-            edx = url2.find(e)
-            video_id = url2[edx+len(e):]
+        # data = util.substr(util.request(url), 'jQuery( document ).ready(function()', '</script>')
+        # self.info(data)
+        data = util.request(url)
+        # urls = re.findall('file:[ ]+\"(?P<url>[^\"].+?)\"', data, re.IGNORECASE | re.DOTALL | re.MULTILINE)
+        # urls = re.findall('<iframe id="video" src="(?P<url>[^\"].+?)\"', data, re.IGNORECASE | re.DOTALL | re.MULTILINE)
+        # if original_yt:
+        # if True:
+        #     url2 = urls[0]
+        #     edx = url2.find('?')
+        #     if edx:
+        #         url2 = url2[:edx]
+        #     if '/' == url2[-1]:
+        #         url2 = url2[:-1]
+        #     video_id = url2.split('/')[-1]
+        #     self.info(video_id)
 
        # video_url = resolver.findstreams([urls[0].replace('https://youtu.be/', 'https://www.youtube.com/watch?v=')])
         vid = YDStreamExtractor.getVideoInfo(url, quality=3) #quality is 0=SD, 1=720p, 2=1080p, 3=Highest Available
         video_url = [vid.streams()[0]]
-        subs = urls[1]
-        # self.info(video_url)
+        # subs = urls[1]
+        # loadSRT('http://titulkomet.cz/wp-content/uploads/ajvngou/30-novych-faktu-o-hearthstone.srt', function(subtitles) {
+        r = re.search('loadSRT\(\'(?P<subtitle>[^\'].+?)\'', data, re.IGNORECASE)
+        if r:
+            subs = r.group('subtitle')
         
-        self.info(subs)
         if video_url and subs:
             for i in video_url:
                 i['subs'] = subs
